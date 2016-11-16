@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Алексей Фетисов](https://up.htmlacademy.ru/ecmascript/1/user/56426).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Лепёшкин](https://up.htmlacademy.ru/ecmascript/1/user/144641).
 
 ---
 
