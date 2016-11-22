@@ -1,5 +1,6 @@
 
-import getElementFromTemplate from './lib';
+import {getElementFromTemplate, select} from './lib';
+import {game3Element} from './game-3';
 
 let game2Template = `<header class="header">
   <div class="header__back">
@@ -48,4 +49,10 @@ let game2Template = `<header class="header">
 
 const game2Element = getElementFromTemplate(game2Template);
 
-export default game2Element;
+let game2Answers = game2Element.querySelectorAll('.game__answer');
+
+for (let i = 0; i < game2Answers.length; ++i) {
+  game2Answers[i].onclick = () => select(game3Element);
+}
+
+export {game2Element};

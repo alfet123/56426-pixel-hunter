@@ -1,5 +1,5 @@
 
-import getElementFromTemplate from './lib';
+import {getElementFromTemplate} from './lib';
 
 let statsTemplate = `<header class="header">
   <div class="header__back">
@@ -112,4 +112,4 @@ let statsTemplate = `<header class="header">
 
 const statsElement = getElementFromTemplate(statsTemplate);
 
-export default statsElement;
+export {statsElement};

@@ -1,5 +1,6 @@
 
-import getElementFromTemplate from './lib';
+import {getElementFromTemplate, select} from './lib';
+import {greetingElement} from './greeting';
 
 let introTemplate = `<div id="intro" class="intro">
   <h1 class="intro__asterisk">*</h1>
@@ -9,4 +10,6 @@ let introTemplate = `<div id="intro" class="intro">
 
 const introElement = getElementFromTemplate(introTemplate);
 
-export default introElement;
+introElement.querySelector('.intro__asterisk').onclick = () => select(greetingElement);
+
+export {introElement};
