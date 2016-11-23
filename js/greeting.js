@@ -1,5 +1,6 @@
 
-import getElementFromTemplate from './lib';
+import {getElementFromTemplate, select} from './lib';
+import {rulesElement} from './rules';
 
 let greetingTemplate = `<div class="greeting  central--blur">
   <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -17,4 +18,6 @@ let greetingTemplate = `<div class="greeting  central--blur">
 
 const greetingElement = getElementFromTemplate(greetingTemplate);
 
-export default greetingElement;
+greetingElement.querySelector('.greeting__continue').onclick = () => select(rulesElement);
+
+export {greetingElement};

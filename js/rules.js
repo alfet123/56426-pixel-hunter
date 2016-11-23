@@ -1,5 +1,6 @@
 
-import getElementFromTemplate from './lib';
+import {getElementFromTemplate, select} from './lib';
+import {game1Element} from './game-1';
 
 let rulesTemplate = `<header class="header">
   <div class="header__back">
@@ -28,4 +29,19 @@ let rulesTemplate = `<header class="header">
 
 const rulesElement = getElementFromTemplate(rulesTemplate);
 
-export default rulesElement;
+let rulesSubmit = rulesElement.querySelector('.rules__button');
+
+rulesElement.querySelector('.rules__input').oninput = (e) => {
+  if (e.target.value) {
+    rulesSubmit.removeAttribute('disabled');
+  } else {
+    rulesSubmit.setAttribute('disabled', '');
+  }
+};
+
+rulesSubmit.onclick = (e) => {
+  e.preventDefault();
+  select(game1Element);
+};
+
+export {rulesElement};

@@ -5,4 +5,10 @@ const getElementFromTemplate = (templateContent) => {
   return node.cloneNode(true);
 };
 
-export default getElementFromTemplate;
+const select = (templateElement) => {
+  let mainElement = document.getElementById('main');
+  mainElement.innerHTML = '';
+  mainElement.appendChild(templateElement);
+};
+
+export {getElementFromTemplate, select};
