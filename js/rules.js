@@ -1,22 +1,9 @@
 
 import {getElementFromTemplate, select} from './lib';
 import game1Element from './game-1';
+import {rules} from './data';
 
 export default () => {
-
-  const rules = {
-    back: 'Back',
-    title: 'Правила',
-    description: {
-      text1: 'Угадай 10 раз для каждого изображения фото',
-      text2: 'или рисунок',
-      text3: '.<br>Фотографиями или рисунками могут быть оба изображения.<br>На каждую попытку отводится 30 секунд.<br>Ошибиться можно не более 3 раз.<br><br>Готовы?'
-    },
-    form: {
-      input: 'Ваше Имя',
-      button: 'Go!'
-    }
-  };
 
   const header = `<header class="header">
     <div class="header__back">

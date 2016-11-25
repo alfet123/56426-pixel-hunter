@@ -1,15 +1,9 @@
 
 import {getElementFromTemplate, select} from './lib';
 import rulesElement from './rules';
+import {greeting} from './data';
 
 export default () => {
-
-  const greeting = {
-    logo: 'Pixel Hunter',
-    title: 'Лучшие художники-фотореалисты бросают&nbsp;тебе&nbsp;вызов!',
-    text: 'Правила игры просты.<br>Нужно отличить рисунок&nbsp;от фотографии и сделать выбор.<br>Задача кажется тривиальной, но не думай, что все так просто.<br>Фотореализм обманчив и коварен.<br>Помни, главное — смотреть очень внимательно.',
-    continue: 'Next'
-  };
 
   const greetingTemplate = `<div class="greeting  central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="${greeting.logo}"></div>

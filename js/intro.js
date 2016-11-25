@@ -1,13 +1,9 @@
 
 import {getElementFromTemplate, select} from './lib';
 import greetingElement from './greeting';
+import {intro} from './data';
 
 export default () => {
-
-  const intro = {
-    title: '*',
-    text: 'Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.'
-  };
 
   const introTemplate = `<div id="intro" class="intro">
     <h1 class="intro__asterisk">${intro.title}</h1>

@@ -1,31 +1,9 @@
 
 import {getElementFromTemplate, select} from './lib';
 import statsElement from './stats';
+import {game3} from './data';
 
 export default () => {
-
-  const game3 = {
-    header: {
-      back: 'Back',
-      timer: 'NN',
-      live: 'Life'
-    },
-    task: 'Найдите рисунок среди изображений',
-    content: {
-      option1: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 2'
-      },
-      option3: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 3'
-      }
-    }
-  };
 
   const header = `<header class="header">
     <div class="header__back">

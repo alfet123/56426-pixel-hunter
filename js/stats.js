@@ -1,51 +1,8 @@
 
 import {getElementFromTemplate} from './lib';
+import {stats} from './data';
 
 export default () => {
-
-  const stats = {
-    title: 'Победа!',
-    result1: {
-      number: '1.',
-      points: '×&nbsp;100',
-      total: '900',
-      extra1: {
-        name: 'Бонус за скорость:',
-        value: '1&nbsp;',
-        points: '×&nbsp;50',
-        total: '50'
-      },
-      extra2: {
-        name: 'Бонус за жизни:',
-        value: '2&nbsp;',
-        points: '×&nbsp;50',
-        total: '100'
-      },
-      extra3: {
-        name: 'Штраф за медлительность:',
-        value: '2&nbsp;',
-        points: '×&nbsp;50',
-        total: '-100'
-      },
-      final: '950'
-    },
-    result2: {
-      number: '2.',
-      final: 'fail'
-    },
-    result3: {
-      number: '3.',
-      points: '×&nbsp;100',
-      total: '900',
-      extra1: {
-        name: 'Бонус за жизни:',
-        value: '2&nbsp;',
-        points: '×&nbsp;50',
-        total: '100'
-      },
-      final: '1000'
-    }
-  };
 
   const header = `<header class="header">
     <div class="header__back">

@@ -1,37 +1,9 @@
 
 import {getElementFromTemplate, select} from './lib';
 import game2Element from './game-2';
+import {game1} from './data';
 
 export default () => {
-
-  const game1 = {
-    header: {
-      back: 'Back',
-      timer: 'NN',
-      live: 'Life'
-    },
-    task: 'Угадайте для каждого изображения фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 2'
-      }
-    },
-    answer: {
-      photo: {
-        value: 'photo',
-        text: 'Фото'
-      },
-      paint: {
-        value: 'paint',
-        text: 'Рисунок'
-      }
-    }
-  };
 
   const header = `<header class="header">
     <div class="header__back">
