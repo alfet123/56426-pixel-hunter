@@ -1,34 +1,19 @@
 
 import {getElementFromTemplate} from './lib';
+import {common} from './markup';
 import {stats} from './data';
 
 export default () => {
 
   const header = `<header class="header">
-    <div class="header__back">
-      <span class="back">
-        <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-        <img src="img/logo_small.png" width="101" height="44">
-      </span>
-    </div>
+    ${common.header.back}
   </header>`;
 
   const result1 = `<table class="result__table">
       <tr>
         <td class="result__number">${stats.result1.number}</td>
         <td colspan="2">
-          <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--unknown"></li>
-          </ul>
+          ${common.stats}
         </td>
         <td class="result__points">${stats.result1.points}</td>
         <td class="result__total">${stats.result1.total}</td>
@@ -63,18 +48,7 @@ export default () => {
       <tr>
         <td class="result__number">${stats.result2.number}</td>
         <td>
-          <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--wrong"></li>
-          </ul>
+          ${common.stats}
         </td>
         <td class="result__total"></td>
         <td class="result__total  result__total--final">${stats.result2.final}</td>
@@ -85,18 +59,7 @@ export default () => {
       <tr>
         <td class="result__number">${stats.result3.number}</td>
         <td colspan="2">
-          <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--unknown"></li>
-          </ul>
+          ${common.stats}
         </td>
         <td class="result__points">${stats.result3.points}</td>
         <td class="result__total">${stats.result3.total}</td>

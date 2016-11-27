@@ -12,7 +12,6 @@ const greeting = {
 };
 
 const rules = {
-  back: 'Back',
   title: 'Правила',
   description: {
     text1: 'Угадай 10 раз для каждого изображения фото',
@@ -26,11 +25,6 @@ const rules = {
 };
 
 const game1 = {
-  header: {
-    back: 'Back',
-    timer: 'NN',
-    live: 'Life'
-  },
   task: 'Угадайте для каждого изображения фото или рисунок?',
   content: {
     option1: {
@@ -55,11 +49,6 @@ const game1 = {
 };
 
 const game2 = {
-  header: {
-    back: 'Back',
-    timer: 'NN',
-    live: 'Life'
-  },
   task: 'Угадай, фото или рисунок?',
   content: {
     option1: {
@@ -80,11 +69,6 @@ const game2 = {
 };
 
 const game3 = {
-  header: {
-    back: 'Back',
-    timer: 'NN',
-    live: 'Life'
-  },
   task: 'Найдите рисунок среди изображений',
   content: {
     option1: {
