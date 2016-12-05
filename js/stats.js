@@ -1,19 +1,19 @@
 
 import {getElementFromTemplate} from './lib';
-import {common} from './markup';
-import {stats} from './data';
+import {markup} from './markup';
+import {stats, gameState} from './data';
 
 export default () => {
 
   const header = `<header class="header">
-    ${common.header.back}
+    ${markup.header.back}
   </header>`;
 
   const result1 = `<table class="result__table">
       <tr>
         <td class="result__number">${stats.result1.number}</td>
         <td colspan="2">
-          ${common.stats}
+          ${markup.stats}
         </td>
         <td class="result__points">${stats.result1.points}</td>
         <td class="result__total">${stats.result1.total}</td>
@@ -48,7 +48,7 @@ export default () => {
       <tr>
         <td class="result__number">${stats.result2.number}</td>
         <td>
-          ${common.stats}
+          ${markup.stats}
         </td>
         <td class="result__total"></td>
         <td class="result__total  result__total--final">${stats.result2.final}</td>
@@ -59,7 +59,7 @@ export default () => {
       <tr>
         <td class="result__number">${stats.result3.number}</td>
         <td colspan="2">
-          ${common.stats}
+          ${markup.stats}
         </td>
         <td class="result__points">${stats.result3.points}</td>
         <td class="result__total">${stats.result3.total}</td>
@@ -85,6 +85,10 @@ export default () => {
   </div>`;
 
   const statsElement = getElementFromTemplate(statsTemplate);
+
+  statsElement.addEventListener('show', (evt) => {
+    evt.target.innerHTML = gameState.answers.correct;
+  });
 
   return statsElement;
 

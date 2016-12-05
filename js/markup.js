@@ -1,5 +1,5 @@
 
-const common = {
+const markup = {
   header: {
     back: `<div class="header__back">
         <span class="back">
@@ -9,11 +9,14 @@ const common = {
       </div>`,
     timer: `
       <h1 class="game__timer">NN</h1>`,
-    lives: `<div class="game__lives">
-        <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-        <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-        <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-      </div>`
+    lives: {
+      block: `<div class="game__lives">
+        </div>`,
+      empty: `
+        <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`,
+      full: `
+        <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`
+    }
   },
   stats: `<ul class="stats">
       <li class="stats__result stats__result--wrong"></li>
@@ -29,4 +32,4 @@ const common = {
     </ul>`
 };
 
-export {common};
+export {markup};

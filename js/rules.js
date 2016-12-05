@@ -1,13 +1,13 @@
 
 import {getElementFromTemplate, select} from './lib';
-import game1Element from './game-1';
-import {common} from './markup';
+import gameElement from './game';
+import {markup} from './markup';
 import {rules} from './data';
 
 export default () => {
 
   const header = `<header class="header">
-    ${common.header.back}
+    ${markup.header.back}
   </header>`;
 
   const content = `<div class="rules  central--none">
@@ -39,7 +39,7 @@ export default () => {
 
   rulesSubmit.onclick = (e) => {
     e.preventDefault();
-    select(game1Element());
+    select(gameElement());
   };
 
   return rulesElement;

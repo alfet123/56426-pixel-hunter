@@ -24,68 +24,6 @@ const rules = {
   }
 };
 
-const game1 = {
-  task: 'Угадайте для каждого изображения фото или рисунок?',
-  content: {
-    option1: {
-      image: 'http://placehold.it/468x458',
-      alt: 'Option 1'
-    },
-    option2: {
-      image: 'http://placehold.it/468x458',
-      alt: 'Option 2'
-    }
-  },
-  answer: {
-    photo: {
-      value: 'photo',
-      text: 'Фото'
-    },
-    paint: {
-      value: 'paint',
-      text: 'Рисунок'
-    }
-  }
-};
-
-const game2 = {
-  task: 'Угадай, фото или рисунок?',
-  content: {
-    option1: {
-      image: 'http://placehold.it/705x455',
-      alt: 'Option 1'
-    }
-  },
-  answer: {
-    photo: {
-      value: 'photo',
-      text: 'Фото'
-    },
-    paint: {
-      value: 'paint',
-      text: 'Рисунок'
-    }
-  }
-};
-
-const game3 = {
-  task: 'Найдите рисунок среди изображений',
-  content: {
-    option1: {
-      image: 'http://placehold.it/304x455',
-      alt: 'Option 1'
-    },
-    option2: {
-      image: 'http://placehold.it/304x455',
-      alt: 'Option 2'
-    },
-    option3: {
-      image: 'http://placehold.it/304x455',
-      alt: 'Option 3'
-    }
-  }
-};
-
 const stats = {
   title: 'Победа!',
   result1: {
@@ -130,10 +68,75 @@ const stats = {
   }
 };
 
+const gameData = [
+  {
+    type: '2',
+    task: 'Угадайте для каждого изображения фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 2'
+      }
+    },
+    answer: {
+      question1: 'paint',
+      question2: 'photo'
+    }
+  },
+  {
+    type: '1',
+    task: 'Угадай, фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/705x455',
+        alt: 'Option 1'
+      }
+    },
+    answer: {
+      question1: 'paint'
+    }
+  },
+  {
+    type: '3',
+    task: 'Найдите рисунок среди изображений',
+    content: {
+      option1: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 2'
+      },
+      option3: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 3'
+      }
+    },
+    answer: 'option3'
+  }
+];
+
+const gameState = {
+  lives: {
+    total: 3,
+    left: 3
+  },
+  answers: {
+    correct: 0,
+    wrong: 0,
+    fast: 0,
+    slow: 0
+  }
+};
+
 export {intro};
 export {greeting};
 export {rules};
-export {game1};
-export {game2};
-export {game3};
 export {stats};
+export {gameData};
+export {gameState};
