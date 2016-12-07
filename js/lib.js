@@ -14,7 +14,8 @@ const select = (templateElement) => {
 };
 
 const drawLives = (livesLeft, livesTotal = 3) => {
-  const livesBlock = getElementFromTemplate(markup.header.lives.block);
+  const livesBlock = document.querySelector('.game__lives');
+  livesBlock.innerHTML = '';
 
   let fullLives = livesLeft;
   let allLives = livesTotal;

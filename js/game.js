@@ -1,67 +1,190 @@
 
-import {getElementFromTemplate, drawLives} from './lib';
-import {markup} from './markup';
+import {getElementFromTemplate, select, drawLives} from './lib';
+import statsElement from './stats';
+import {markup, getContent, getStats} from './markup';
 import {gameData, gameState} from './data';
 
 export default () => {
 
+  let timerId;
+  let timerValue;
+  let gameInputs;
+
+  const answers = {
+    option1: false,
+    option2: false,
+    value1: false,
+    value2: false
+  };
+
   const header = `<header class="header">
       ${markup.header.back}
       ${markup.header.timer}
+      ${markup.header.lives.block}
     </header>`;
 
   const gameTemplate = `${header}
-    <div class="game">
-    </div>`;
+    <div class="game"></div>`;
 
   const gameElement = getElementFromTemplate(gameTemplate);
+  const gameTimerElement = gameElement.querySelector('.game__timer');
+  const gameContent = gameElement.querySelector('.game');
 
-  const gameOnShow = () => {
+  const levelsCount = gameData.length;
+  let currentLevel = 0;
 
-    let game = gameData[0];
+  const nextLevel = () => {
+    currentLevel++;
+    if ((currentLevel < levelsCount) && (gameState.lives.left > 0)) {
+      levelInit(currentLevel);
+    } else {
+      select(statsElement());
+    }
+  };
 
-    const gameHeader = document.querySelector('.header');
-    gameHeader.appendChild(drawLives(gameState.lives.left, gameState.lives.total));
+  const answerCorrect = () => {
+    answers.value1 = false;
+    answers.value2 = false;
+    gameState.answers.correct++; // ответ верный
+    gameState.levels[currentLevel] = 'correct';
+    if (timerValue > 20) {
+      gameState.answers.fast++; // ответ быстрый
+      gameState.levels[currentLevel] = 'fast';
+    }
+    if (timerValue < 10) {
+      gameState.answers.slow++; // ответ медленный
+      gameState.levels[currentLevel] = 'slow';
+    }
+  };
 
-    const task = `<p class="game__task">${game.task}</p>`;
-    const content = `<form class="game__content">
-        <div class="game__option">
-          <img src="${game.content.option1.image}" alt="${game.content.option1.alt}" width="468" height="458">
-          <label class="game__answer  game__answer--photo">
-            <input name="question1" type="radio" value="photo">
-            <span>Фото</span>
-          </label>
-          <label class="game__answer  game__answer--paint">
-            <input name="question1" type="radio" value="paint">
-            <span>Рисунок</span>
-          </label>
-        </div>
-        <div class="game__option">
-          <img src="${game.content.option2.image}" alt="${game.content.option2.alt}" width="468" height="458">
-          <label class="game__answer  game__answer--photo">
-            <input name="question2" type="radio" value="photo">
-            <span>Фото</span>
-          </label>
-          <label class="game__answer  game__answer--paint">
-            <input name="question2" type="radio" value="paint">
-            <span>Рисунок</span>
-          </label>
-        </div>
-      </form>`;
-    const stats = `<div class="stats">
-        ${markup.stats}
-      </div>`;
+  // Обработчик таймера
 
-    let gameCurrentLevel = `${task}
+  const gameTimer = () => {
+    if (timerValue > 0) {
+      timerValue--;
+      gameTimerElement.innerHTML = timerValue;
+    } else {
+      clearInterval(timerId); // удаление таймера после 30 сек.
+      gameState.lives.left--;
+      gameState.levels[currentLevel] = 'wrong';
+      nextLevel();
+    }
+  };
+
+  // Функция проверки ответов
+
+  const checkAnswers = (gameType) => {
+    if (gameType === '2') {
+      if (answers.option1 && answers.option2) {
+        clearInterval(timerId); // удаление таймера после выбора ответа на каждом изображении
+        answers.option1 = false;
+        answers.option2 = false;
+        if (answers.value1 && answers.value2) {
+          answerCorrect();
+        } else {
+          answers.value1 = false;
+          answers.value2 = false;
+          gameState.lives.left--; // ответ неверный
+          gameState.levels[currentLevel] = 'wrong';
+        }
+        nextLevel();
+      }
+    } else {
+      clearInterval(timerId); // удаление таймера после выбора ответа
+      if (answers.value1) {
+        answerCorrect();
+      } else {
+        gameState.lives.left--; // ответ неверный
+        gameState.levels[currentLevel] = 'wrong';
+      }
+      nextLevel();
+    }
+  };
+
+  // Обработчик клика 1
+
+  const onAnswer1 = (evt) => {
+    if (evt.target.value === gameData[currentLevel].answer.question1) {
+      answers.value1 = true;
+    }
+    checkAnswers('1');
+  };
+
+  // Обработчик клика 2
+
+  const onAnswer2 = (evt) => {
+    if (evt.target.name === 'question1') {
+      answers.option1 = true;
+      if (evt.target.value === gameData[currentLevel].answer.question1) {
+        answers.value1 = true;
+      }
+    }
+    if (evt.target.name === 'question2') {
+      answers.option2 = true;
+      if (evt.target.value === gameData[currentLevel].answer.question2) {
+        answers.value2 = true;
+      }
+    }
+    checkAnswers('2');
+  };
+
+  // Обработчик клика 3
+
+  const onAnswer3 = (evt) => {
+    if (evt.target.title === gameData[currentLevel].answer) {
+      answers.value1 = true;
+    }
+    checkAnswers('3');
+  };
+
+  const levelInit = (level) => {
+
+    // Вывод жизней
+
+    drawLives(gameState.lives.left, gameState.lives.total);
+
+    // Вывод данных уровня
+
+    const task = '<p class="game__task">' + gameData[level].task + '</p>';
+    const content = getContent(gameData[level]);
+    const stats = getStats(gameState.levels);
+
+    gameContent.innerHTML = `${task}
       ${content}
       ${stats}`;
 
-    const gameContentElement = document.querySelector('.game');
-    gameContentElement.innerHTML = gameCurrentLevel;
+    // Установка обработчиков на варианты ответов
 
-  }; // gameOnShow
+    switch (gameData[level].type) {
+      case '1':
+        gameInputs = gameContent.querySelectorAll('input');
+        for (let i = 0; i < gameInputs.length; ++i) {
+          gameInputs[i].onclick = onAnswer1;
+        }
+        break;
+      case '2':
+        gameInputs = gameContent.querySelectorAll('input');
+        for (let j = 0; j < gameInputs.length; ++j) {
+          gameInputs[j].onclick = onAnswer2;
+        }
+        break;
+      case '3':
+        gameInputs = gameContent.querySelectorAll('.game__option');
+        for (let k = 0; k < gameInputs.length; ++k) {
+          gameInputs[k].onclick = onAnswer3;
+        }
+        break;
+    }
 
-  gameElement.onshow = gameOnShow;
+    // Инициализация и запуск таймера
+
+    timerValue = 30;
+    gameTimerElement.innerHTML = timerValue;
+    timerId = setInterval(gameTimer, 1000);
+
+  };
+
+  gameElement.onshow = () => levelInit(currentLevel);
 
   return gameElement;
 
