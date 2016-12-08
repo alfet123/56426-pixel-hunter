@@ -1,13 +1,13 @@
 
 import {getElementFromTemplate, select} from './lib';
-import game1Element from './game-1';
-import {common} from './markup';
+import gameElement from './game';
+import {markup} from './markup';
 import {rules} from './data';
 
 export default () => {
 
   const header = `<header class="header">
-    ${common.header.back}
+    ${markup.header.back}
   </header>`;
 
   const content = `<div class="rules  central--none">
@@ -29,17 +29,20 @@ export default () => {
 
   const rulesSubmit = rulesElement.querySelector('.rules__button');
 
-  rulesElement.querySelector('.rules__input').oninput = (e) => {
-    if (e.target.value) {
+  rulesElement.querySelector('.rules__input').oninput = (evt) => {
+    if (evt.target.value) {
       rulesSubmit.removeAttribute('disabled');
     } else {
       rulesSubmit.setAttribute('disabled', '');
     }
   };
 
-  rulesSubmit.onclick = (e) => {
-    e.preventDefault();
-    select(game1Element());
+  const element = gameElement();
+
+  rulesSubmit.onclick = (evt) => {
+    evt.preventDefault();
+    select(element);
+    element.onshow();
   };
 
   return rulesElement;

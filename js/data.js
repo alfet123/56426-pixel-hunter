@@ -24,116 +24,203 @@ const rules = {
   }
 };
 
-const game1 = {
-  task: 'Угадайте для каждого изображения фото или рисунок?',
-  content: {
-    option1: {
-      image: 'http://placehold.it/468x458',
-      alt: 'Option 1'
+const gameData = [
+  {
+    type: '2',
+    task: 'Угадайте для каждого изображения фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 2'
+      }
     },
-    option2: {
-      image: 'http://placehold.it/468x458',
-      alt: 'Option 2'
+    answer: {
+      question1: 'photo',
+      question2: 'photo'
     }
   },
-  answer: {
-    photo: {
-      value: 'photo',
-      text: 'Фото'
+  {
+    type: '1',
+    task: 'Угадай, фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/705x455',
+        alt: 'Option 1'
+      }
     },
-    paint: {
-      value: 'paint',
-      text: 'Рисунок'
+    answer: {
+      question1: 'photo'
+    }
+  },
+  {
+    type: '3',
+    task: 'Найдите рисунок среди изображений',
+    content: {
+      option1: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 2'
+      },
+      option3: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 3'
+      }
+    },
+    answer: 'img1'
+  },
+  {
+    type: '1',
+    task: 'Угадай, фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/705x455',
+        alt: 'Option 1'
+      }
+    },
+    answer: {
+      question1: 'paint'
+    }
+  },
+  {
+    type: '2',
+    task: 'Угадайте для каждого изображения фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 2'
+      }
+    },
+    answer: {
+      question1: 'paint',
+      question2: 'paint'
+    }
+  },
+  {
+    type: '3',
+    task: 'Найдите рисунок среди изображений',
+    content: {
+      option1: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 2'
+      },
+      option3: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 3'
+      }
+    },
+    answer: 'img3'
+  },
+  {
+    type: '2',
+    task: 'Угадайте для каждого изображения фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 2'
+      }
+    },
+    answer: {
+      question1: 'photo',
+      question2: 'paint'
+    }
+  },
+  {
+    type: '1',
+    task: 'Угадай, фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/705x455',
+        alt: 'Option 1'
+      }
+    },
+    answer: {
+      question1: 'photo'
+    }
+  },
+  {
+    type: '3',
+    task: 'Найдите рисунок среди изображений',
+    content: {
+      option1: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 2'
+      },
+      option3: {
+        image: 'http://placehold.it/304x455',
+        alt: 'Option 3'
+      }
+    },
+    answer: 'img2'
+  },
+  {
+    type: '2',
+    task: 'Угадайте для каждого изображения фото или рисунок?',
+    content: {
+      option1: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 1'
+      },
+      option2: {
+        image: 'http://placehold.it/468x458',
+        alt: 'Option 2'
+      }
+    },
+    answer: {
+      question1: 'paint',
+      question2: 'photo'
     }
   }
-};
+];
 
-const game2 = {
-  task: 'Угадай, фото или рисунок?',
-  content: {
-    option1: {
-      image: 'http://placehold.it/705x455',
-      alt: 'Option 1'
-    }
+const gameState = {
+  lives: {
+    total: 3,
+    left: 3
   },
-  answer: {
-    photo: {
-      value: 'photo',
-      text: 'Фото'
-    },
-    paint: {
-      value: 'paint',
-      text: 'Рисунок'
-    }
-  }
-};
-
-const game3 = {
-  task: 'Найдите рисунок среди изображений',
-  content: {
-    option1: {
-      image: 'http://placehold.it/304x455',
-      alt: 'Option 1'
-    },
-    option2: {
-      image: 'http://placehold.it/304x455',
-      alt: 'Option 2'
-    },
-    option3: {
-      image: 'http://placehold.it/304x455',
-      alt: 'Option 3'
-    }
-  }
-};
-
-const stats = {
-  title: 'Победа!',
-  result1: {
-    number: '1.',
-    points: '×&nbsp;100',
-    total: '900',
-    extra1: {
-      name: 'Бонус за скорость:',
-      value: '1&nbsp;',
-      points: '×&nbsp;50',
-      total: '50'
-    },
-    extra2: {
-      name: 'Бонус за жизни:',
-      value: '2&nbsp;',
-      points: '×&nbsp;50',
-      total: '100'
-    },
-    extra3: {
-      name: 'Штраф за медлительность:',
-      value: '2&nbsp;',
-      points: '×&nbsp;50',
-      total: '-100'
-    },
-    final: '950'
-  },
-  result2: {
-    number: '2.',
-    final: 'fail'
-  },
-  result3: {
-    number: '3.',
-    points: '×&nbsp;100',
-    total: '900',
-    extra1: {
-      name: 'Бонус за жизни:',
-      value: '2&nbsp;',
-      points: '×&nbsp;50',
-      total: '100'
-    },
-    final: '1000'
+  levels: [
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown',
+    'unknown'
+  ],
+  answers: {
+    correct: 0,
+    fast: 0,
+    slow: 0
   }
 };
 
 export {intro};
 export {greeting};
 export {rules};
-export {game1};
-export {game2};
-export {game3};
-export {stats};
+export {gameData};
+export {gameState};
