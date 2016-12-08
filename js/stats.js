@@ -12,6 +12,7 @@ export default () => {
   };
 
   const score = gameState.answers.correct * factor.points;
+  const scoreString = (score > 0) ? gameState.answers.correct + '&nbsp;×&nbsp;' + factor.points : '';
   const fastBonus = gameState.answers.fast * factor.speed;
   const livesBonus = gameState.lives.left * factor.lives;
   const slowPenalty = gameState.answers.slow * factor.speed;
@@ -28,7 +29,7 @@ export default () => {
       <tr>
         <td class="result__number">1.</td>
         <td colspan="2">${getStats(gameState.levels)}</td>
-        <td class="result__points">${gameState.answers.correct}&nbsp;×&nbsp;${factor.points}</td>
+        <td class="result__points">${scoreString}</td>
         <td class="result__total">${score}</td>
       </tr>`;
   if (fastBonus > 0) {
@@ -70,12 +71,6 @@ export default () => {
   </div>`;
 
   const statsElement = getElementFromTemplate(statsTemplate);
-
-/*
-  statsElement.addEventListener('show', (evt) => {
-    evt.target.innerHTML = gameState.answers.correct;
-  });
-*/
 
   return statsElement;
 
