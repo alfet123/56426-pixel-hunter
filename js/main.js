@@ -1,6 +1,6 @@
 
 import {select} from './lib';
-import introElement from './intro';
+import IntroView from './intro-view';
 
 let mainElement = document.getElementById('main');
 let switcher = document.createElement('div');
