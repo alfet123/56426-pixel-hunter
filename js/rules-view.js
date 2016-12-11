@@ -41,8 +41,8 @@ export default class RulesView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
-      select(this.game);
-      this.game.onshow();
+      select(this.game.element);
+      this.game.element.onshow();
     };
   }
 

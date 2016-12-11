@@ -1,6 +1,4 @@
 
-import {markup} from './markup';
-
 const getElementFromTemplate = (templateContent) => {
   let node = document.createElement('span');
   node.innerHTML += templateContent;
@@ -32,9 +30,9 @@ const drawLives = (livesLeft, livesTotal = 3) => {
 
   for (let i = allLives; i > 0; i--) {
     if (fullLives < i) {
-      livesBlock.innerHTML += markup.header.lives.empty;
+      livesBlock.innerHTML += '<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">';
     } else {
-      livesBlock.innerHTML += markup.header.lives.full;
+      livesBlock.innerHTML += '<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">';
     }
   }
 

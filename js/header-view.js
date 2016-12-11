@@ -7,7 +7,7 @@ export default class HeaderView extends AbstractView {
     super();
   }
 
-  getMarkup() {
+  getMarkup(game = false) {
     return `
       <header class="header">
         <div class="header__back">
@@ -16,6 +16,8 @@ export default class HeaderView extends AbstractView {
             <img src="img/logo_small.png" width="101" height="44">
           </span>
         </div>
+      ${(game) ? `<h1 class="game__timer">NN</h1>
+        <div class="game__lives"></div>` : ''}
       </header>`;
   }
 

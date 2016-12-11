@@ -24,7 +24,7 @@ export default class GreetingView extends AbstractView {
   }
 
   bindHandlers() {
-    this.element.querySelector('.greeting__continue').onclick = () => select(this.rules);
+    this.element.querySelector('.greeting__continue').onclick = () => select(this.rules.element);
   }
 
 }

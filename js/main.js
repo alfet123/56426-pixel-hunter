@@ -10,4 +10,5 @@ switcher.innerHTML = '' +
 switcher.style.cssText = 'text-align: center';
 mainElement.after(switcher);
 
-select(introElement());
+const intro = new IntroView();
+select(intro.element);

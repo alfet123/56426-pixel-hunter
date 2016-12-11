@@ -19,7 +19,7 @@ export default class IntroView extends AbstractView {
   }
 
   bindHandlers() {
-    this.element.querySelector('.intro__asterisk').onclick = () => select(this.greeting);
+    this.element.querySelector('.intro__asterisk').onclick = () => select(this.greeting.element);
   }
 
 }
