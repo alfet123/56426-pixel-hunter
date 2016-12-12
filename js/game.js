@@ -1,10 +1,12 @@
 
-import {getElementFromTemplate, select, drawLives} from './lib';
-import statsElement from './stats';
-import {markup, getContent, getStats} from './markup';
+import {select, drawLives} from './lib';
+import StatsView from './stats-view';
+import {getContent, getStats} from './markup';
 import {gameData, gameState} from './data';
 
 export default () => {
+
+  const statScreen = new StatsView();
 
   let timerId;
   let timerValue;
@@ -17,18 +19,8 @@ export default () => {
     value2: false
   };
 
-  const header = `<header class="header">
-      ${markup.header.back}
-      ${markup.header.timer}
-      ${markup.header.lives.block}
-    </header>`;
-
-  const gameTemplate = `${header}
-    <div class="game"></div>`;
-
-  const gameElement = getElementFromTemplate(gameTemplate);
-  const gameTimerElement = gameElement.querySelector('.game__timer');
-  const gameContent = gameElement.querySelector('.game');
+  const gameTimerElement = document.querySelector('.game__timer');
+  const gameContent = document.querySelector('.game');
 
   const levelsCount = gameData.length;
   let currentLevel = 0;
@@ -38,7 +30,7 @@ export default () => {
     if ((currentLevel < levelsCount) && (gameState.lives.left > 0)) {
       levelInit(currentLevel);
     } else {
-      select(statsElement());
+      select(statScreen.element);
     }
   };
 
@@ -184,8 +176,6 @@ export default () => {
 
   };
 
-  gameElement.onshow = () => levelInit(currentLevel);
-
-  return gameElement;
+  levelInit(currentLevel);
 
 };

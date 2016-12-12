@@ -1,6 +1,6 @@
 
 import {select} from './lib';
-import introElement from './intro';
+import IntroView from './intro-view';
 
 let mainElement = document.getElementById('main');
 let switcher = document.createElement('div');
@@ -10,4 +10,5 @@ switcher.innerHTML = '' +
 switcher.style.cssText = 'text-align: center';
 mainElement.after(switcher);
 
-select(introElement());
+const intro = new IntroView();
+select(intro.element);
