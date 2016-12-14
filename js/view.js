@@ -1,11 +1,9 @@
-
-import {getElementFromTemplate} from './lib';
-
 export default class AbstractView {
 
   get element() {
     if (!this._element) {
-      this._element = getElementFromTemplate(this.getMarkup());
+      this._element = document.createElement('span');
+      this._element.innerHTML = this.getMarkup();
       this.bindHandlers();
     }
     return this._element;
