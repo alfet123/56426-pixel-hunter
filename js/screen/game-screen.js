@@ -1,4 +1,5 @@
-import gameModel from '../data/game-model';
+
+import gameModel from '../game/game-model';
 import HeaderView from '../game/header-view';
 import LevelView from '../game/level-view';
 import Application from '../application';

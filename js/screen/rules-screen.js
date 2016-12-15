@@ -1,6 +1,7 @@
+
 import AbstractView from '../view';
-import HeaderView from '../header-view';
 import Application from '../application';
+import HeaderView from '../game/header-view';
 
 class RulesView extends AbstractView {
 
@@ -24,7 +25,6 @@ class RulesView extends AbstractView {
       </div>`;
   }
 
-
   bindHandlers() {
     const input = this.element.querySelector('.rules__input');
     const submit = this.element.querySelector('.rules__button');
@@ -39,11 +39,10 @@ class RulesView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
-      select(this.game.element);
-      this.game.element.onshow();
+//      select(this.game.element);
+//      this.game.element.onshow();
+      Application.showGame();
     };
-
-//    this.element.querySelector('.greeting__continue').onclick = () => Application.showGame();
   }
 
 }

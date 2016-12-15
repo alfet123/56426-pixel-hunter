@@ -1,3 +1,4 @@
+
 import AbstractView from '../view';
 import Application from '../application';
 
@@ -10,7 +11,6 @@ class IntroView extends AbstractView {
         <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
       </div>`;
   }
-
 
   bindHandlers() {
     this.element.querySelector('.intro__asterisk').onclick = () => Application.showGreeting();
