@@ -1,6 +1,6 @@
 
 import AbstractView from '../view';
-import Application from '../application';
+// import Application from '../application';
 import HeaderView from '../game/header-view';
 import {getStats} from '../data/markup';
 import {gameState} from '../data/data';
@@ -25,7 +25,7 @@ class StatsView extends AbstractView {
     const livesBonus = gameState.lives.left * factor.lives;
     const slowPenalty = gameState.answers.slow * factor.speed;
 
-    const scoreTotal = score + fastBonus + livesBonus - slowPenalty;
+    const scoreTotal = (score > 0) ? score + fastBonus + livesBonus - slowPenalty : 0;
 
     const statsTitle = (scoreTotal > 0) ? 'Победа!' : 'Поражение';
 
@@ -39,32 +39,34 @@ class StatsView extends AbstractView {
           <td class="result__points">${scoreString}</td>
           <td class="result__total">${score}</td>
         </tr>`;
-    if (fastBonus > 0) {
-      result += `<tr>
-          <td></td>
-          <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">${gameState.answers.fast}&nbsp;<span class="stats__result  stats__result--fast"></span></td>
-          <td class="result__points">×&nbsp;${factor.speed}</td>
-          <td class="result__total">${fastBonus}</td>
-        </tr>`;
-    }
-    if (livesBonus > 0) {
-      result += `<tr>
-          <td></td>
-          <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">${gameState.lives.left}&nbsp;<span class="stats__result  stats__result--heart"></span></td>
-          <td class="result__points">×&nbsp;${factor.lives}</td>
-          <td class="result__total">${livesBonus}</td>
-        </tr>`;
-    }
-    if (slowPenalty > 0) {
-      result += `<tr>
-          <td></td>
-          <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${gameState.answers.slow}&nbsp;<span class="stats__result  stats__result--slow"></span></td>
-          <td class="result__points">×&nbsp;${factor.speed}</td>
-          <td class="result__total">-${slowPenalty}</td>
-        </tr>`;
+    if (score > 0) {
+      if (fastBonus > 0) {
+        result += `<tr>
+            <td></td>
+            <td class="result__extra">Бонус за скорость:</td>
+            <td class="result__extra">${gameState.answers.fast}&nbsp;<span class="stats__result  stats__result--fast"></span></td>
+            <td class="result__points">×&nbsp;${factor.speed}</td>
+            <td class="result__total">${fastBonus}</td>
+          </tr>`;
+      }
+      if (livesBonus > 0) {
+        result += `<tr>
+            <td></td>
+            <td class="result__extra">Бонус за жизни:</td>
+            <td class="result__extra">${gameState.lives.left}&nbsp;<span class="stats__result  stats__result--heart"></span></td>
+            <td class="result__points">×&nbsp;${factor.lives}</td>
+            <td class="result__total">${livesBonus}</td>
+          </tr>`;
+      }
+      if (slowPenalty > 0) {
+        result += `<tr>
+            <td></td>
+            <td class="result__extra">Штраф за медлительность:</td>
+            <td class="result__extra">${gameState.answers.slow}&nbsp;<span class="stats__result  stats__result--slow"></span></td>
+            <td class="result__points">×&nbsp;${factor.speed}</td>
+            <td class="result__total">-${slowPenalty}</td>
+          </tr>`;
+      }
     }
     result += `<tr>
             <td colspan="5" class="result__total  result__total--final">${scoreTotal}</td>
@@ -76,7 +78,7 @@ class StatsView extends AbstractView {
   }
 
   bindHandlers() {
-//    this.element.querySelector('.intro__asterisk').onclick = () => Application.showGreeting();
+//    document.querySelector('.header__back').onclick = () => Application.showGreeting();
   }
 
 }

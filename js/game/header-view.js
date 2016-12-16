@@ -1,5 +1,5 @@
 
-import AbstractView from './view';
+import AbstractView from '../view';
 
 export default class HeaderView extends AbstractView {
 
@@ -16,7 +16,7 @@ export default class HeaderView extends AbstractView {
   _drawLives() {
     let livesBlock = '<div class="game__lives">';
     for (let i = this.state.lives.total; i > 0; i--) {
-      livesBlock. += `<img src="img/heart__${(this.state.lives.left < i) ? 'empty' : 'full'}.svg" class="game__heart" alt="Life" width="32" height="32">`;
+      livesBlock += `<img src="img/heart__${(this.state.lives.left < i) ? 'empty' : 'full'}.svg" class="game__heart" alt="Life" width="32" height="32">`;
     }
     livesBlock += '</div>';
     return livesBlock;
@@ -32,7 +32,7 @@ export default class HeaderView extends AbstractView {
           </span>
         </div>
       ${(game) ? `<h1 class="game__timer">NN</h1>
-        ${_drawLives()}` : ''}
+        ${this._drawLives()}` : ''}
       </header>`;
   }
 

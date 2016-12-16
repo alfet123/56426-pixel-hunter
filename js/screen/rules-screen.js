@@ -41,8 +41,11 @@ class RulesView extends AbstractView {
       evt.preventDefault();
 //      select(this.game.element);
 //      this.game.element.onshow();
-      Application.showGame();
+//      Application.showGame();
+      Application.showStats();
     };
+
+//    document.querySelector('.header__back').onclick = () => Application.showGreeting();
   }
 
 }
