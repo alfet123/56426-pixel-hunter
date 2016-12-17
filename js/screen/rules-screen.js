@@ -26,8 +26,13 @@ class RulesView extends AbstractView {
   }
 
   bindHandlers() {
+    const back = this.element.querySelector('.header__back');
     const input = this.element.querySelector('.rules__input');
     const submit = this.element.querySelector('.rules__button');
+
+    back.onclick = (evt) => {
+      Application.showGreeting();
+    };
 
     input.oninput = (evt) => {
       if (evt.target.value) {
@@ -41,11 +46,9 @@ class RulesView extends AbstractView {
       evt.preventDefault();
 //      select(this.game.element);
 //      this.game.element.onshow();
-//      Application.showGame();
-      Application.showStats();
+      Application.showGame();
+//      Application.showStats();
     };
-
-//    document.querySelector('.header__back').onclick = () => Application.showGreeting();
   }
 
 }

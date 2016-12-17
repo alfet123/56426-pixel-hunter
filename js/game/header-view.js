@@ -3,15 +3,15 @@ import AbstractView from '../view';
 
 export default class HeaderView extends AbstractView {
 
-  constructor(gameState) {
+  constructor(gameState = null) {
     super();
     this.state = gameState;
   }
 
-  update(newState) {
+/*  update(newState) {
     this.state = newState;
     this.element.innerHTML = this.getMarkup();
-  }
+  }*/
 
   _drawLives() {
     let livesBlock = '<div class="game__lives">';
@@ -22,7 +22,8 @@ export default class HeaderView extends AbstractView {
     return livesBlock;
   }
 
-  getMarkup(game = false) {
+//  getMarkup(game = false) {
+  getMarkup() {
     return `
       <header class="header">
         <div class="header__back">
@@ -31,7 +32,7 @@ export default class HeaderView extends AbstractView {
             <img src="img/logo_small.png" width="101" height="44">
           </span>
         </div>
-      ${(game) ? `<h1 class="game__timer">NN</h1>
+      ${(this.state) ? `<h1 class="game__timer">NN</h1>
         ${this._drawLives()}` : ''}
       </header>`;
   }

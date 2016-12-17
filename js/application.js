@@ -2,7 +2,7 @@
 import introScreen from './screen/intro-screen';
 import greetingScreen from './screen/greeting-screen';
 import rulesScreen from './screen/rules-screen';
-// import gameScreen from './screen/game-screen';
+import gameScreen from './screen/game-screen';
 import statsScreen from './screen/stats-screen';
 
 const main = document.getElementById('main');
@@ -31,10 +31,10 @@ export default class Application {
     changeView(rulesScreen());
   }
 
-/*  static showGame() {
+  static showGame() {
     changeView(gameScreen());
   }
-*/
+
   static showStats(stats) {
     changeView(statsScreen(stats));
   }
