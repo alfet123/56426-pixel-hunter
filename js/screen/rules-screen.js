@@ -26,11 +26,11 @@ class RulesView extends AbstractView {
   }
 
   bindHandlers() {
-    const back = this.element.querySelector('.header__back');
+    const back = this.element.querySelector('.back-btn');
     const input = this.element.querySelector('.rules__input');
     const submit = this.element.querySelector('.rules__button');
 
-    back.onclick = (evt) => {
+    back.onclick = () => {
       Application.showGreeting();
     };
 
@@ -44,10 +44,7 @@ class RulesView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
-//      select(this.game.element);
-//      this.game.element.onshow();
       Application.showGame();
-//      Application.showStats();
     };
   }
 

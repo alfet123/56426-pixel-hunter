@@ -1,42 +1,69 @@
 
 import {initialState} from './game';
+import {gameData} from '../data/data';
 
 class GameModel {
-  constructor(gameState = initialState) {
-    this.state = gameState;
+
+  constructor() {
+    this.state = Object.assign({}, initialState);
   }
 
-  get state() {
+  getState() {
     return this.state;
   }
 
-/*  hasNextLevel() {
-    return hasLevel(this._state.level + 1);
+  getData() {
+    return gameData[this.state.level];
   }
 
-  nextLevel() {
-    this._state = setCurrentLevel(this._state, this._state.level + 1);
-  }
-
-  die() {
-    this._state = setLives(this._state, this._state.lives - 1);
-  }
-
-  restart() {
-    this._state = initialGame;
-  }
-
-  isDead() {
-    return this._state.lives <= 0;
-  }
-
-  getCurrentLevel() {
-    return getLevel(this._state.level);
+  initTimer() {
+    this.state.timer.value = this.state.timer.init;
   }
 
   tick() {
-    this._state = setTime(this._state, this._state.time + 1);
-  }*/
+    this.state.timer.value--;
+  }
+
+  getTimer() {
+    return this.state.timer.value;
+  }
+
+  correct() {
+    this.state.answers.correct++;
+    this.state.levels[this.state.level] = 'correct';
+  }
+
+  fast() {
+    this.state.answers.fast++;
+    this.state.levels[this.state.level] = 'fast';
+  }
+
+  slow() {
+    this.state.answers.slow++;
+    this.state.levels[this.state.level] = 'slow';
+  }
+
+  wrong() {
+    this.state.lives.left--;
+    this.state.levels[this.state.level] = 'wrong';
+  }
+
+  hasLives() {
+    return this.state.lives.left > 0;
+  }
+
+  nextLevel() {
+    this.state.level++;
+  }
+
+  getLevel() {
+    return this.state.level;
+  }
+
+  hasLevel() {
+    return this.state.level < gameData.length;
+  }
+
 }
 
 export default new GameModel();

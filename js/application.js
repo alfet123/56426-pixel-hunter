@@ -32,11 +32,13 @@ export default class Application {
   }
 
   static showGame() {
-    changeView(gameScreen());
+    const element = gameScreen();
+    changeView(element);
+    element.onshow();
   }
 
-  static showStats(stats) {
-    changeView(statsScreen(stats));
+  static showStats(state) {
+    changeView(statsScreen(state));
   }
 
 }
