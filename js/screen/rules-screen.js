@@ -1,15 +1,13 @@
 
-import {select} from './lib';
-import AbstractView from './view';
-import HeaderView from './header-view';
-import GameView from './game-view';
+import AbstractView from '../view';
+import Application from '../application';
+import HeaderView from '../game/header-view';
 
-export default class RulesView extends AbstractView {
+class RulesView extends AbstractView {
 
   constructor() {
     super();
     this.header = new HeaderView();
-    this.game = new GameView();
   }
 
   getMarkup() {
@@ -28,8 +26,13 @@ export default class RulesView extends AbstractView {
   }
 
   bindHandlers() {
+    const back = this.element.querySelector('.back-btn');
     const input = this.element.querySelector('.rules__input');
     const submit = this.element.querySelector('.rules__button');
+
+    back.onclick = () => {
+      Application.showGreeting();
+    };
 
     input.oninput = (evt) => {
       if (evt.target.value) {
@@ -41,9 +44,10 @@ export default class RulesView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
-      select(this.game.element);
-      this.game.element.onshow();
+      Application.showGame();
     };
   }
 
 }
+
+export default () => new RulesView().element;

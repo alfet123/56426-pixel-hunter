@@ -1,5 +1,5 @@
 
-const gameData = [
+export const gameData = [
   {
     type: '2',
     task: 'Угадайте для каждого изображения фото или рисунок?',
@@ -169,30 +169,3 @@ const gameData = [
     }
   }
 ];
-
-const gameState = {
-  lives: {
-    total: 3,
-    left: 3
-  },
-  levels: [
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown'
-  ],
-  answers: {
-    correct: 0,
-    fast: 0,
-    slow: 0
-  }
-};
-
-export {gameData};
-export {gameState};

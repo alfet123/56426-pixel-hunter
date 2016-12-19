@@ -1,14 +1,8 @@
 
-import {select} from './lib';
-import AbstractView from './view';
-import GreetingView from './greeting-view';
+import AbstractView from '../view';
+import Application from '../application';
 
-export default class IntroView extends AbstractView {
-
-  constructor() {
-    super();
-    this.greeting = new GreetingView();
-  }
+class IntroView extends AbstractView {
 
   getMarkup() {
     return `
@@ -19,7 +13,9 @@ export default class IntroView extends AbstractView {
   }
 
   bindHandlers() {
-    this.element.querySelector('.intro__asterisk').onclick = () => select(this.greeting.element);
+    this.element.querySelector('.intro__asterisk').onclick = () => Application.showGreeting();
   }
 
 }
+
+export default () => new IntroView().element;

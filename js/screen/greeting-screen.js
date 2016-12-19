@@ -1,14 +1,8 @@
 
-import {select} from './lib';
-import AbstractView from './view';
-import RulesView from './rules-view';
+import AbstractView from '../view';
+import Application from '../application';
 
-export default class GreetingView extends AbstractView {
-
-  constructor() {
-    super();
-    this.rules = new RulesView();
-  }
+class GreetingView extends AbstractView {
 
   getMarkup() {
     return `
@@ -24,7 +18,9 @@ export default class GreetingView extends AbstractView {
   }
 
   bindHandlers() {
-    this.element.querySelector('.greeting__continue').onclick = () => select(this.rules.element);
+    this.element.querySelector('.greeting__continue').onclick = () => Application.showRules();
   }
 
 }
+
+export default () => new GreetingView().element;
