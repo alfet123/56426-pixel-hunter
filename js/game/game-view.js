@@ -1,6 +1,6 @@
 
 import AbstractView from '../view';
-import {getStats} from '../game/game';
+import {QuestionType, getStats} from '../game/game';
 
 export default class GameView extends AbstractView {
 
@@ -11,13 +11,13 @@ export default class GameView extends AbstractView {
   }
 
   getMarkup() {
-    this.content = '<p class="game__task">' + this.data.task + '</p>';
+    this.content = '<p class="game__task">' + this.data.question + '</p>';
 
     switch (this.data.type) {
-      case '1':
+      case QuestionType.TINDER_LIKE:
         this.content += `<form class="game__content  game__content--wide">
             <div class="game__option">
-              <img src="${this.data.content.option1.image}" alt="${this.data.content.option1.alt}" width="705" height="455">
+              <img src="${this.data.answers[0].image.url}" alt="Option 1" width="${this.data.answers[0].image.width}" height="${this.data.answers[0].image.height}">
               <label class="game__answer  game__answer--photo">
                 <input name="question1" type="radio" value="photo">
                 <span>Фото</span>
@@ -29,10 +29,10 @@ export default class GameView extends AbstractView {
             </div>
           </form>`;
         break;
-      case '2':
+      case QuestionType.TWO_OF_TWO:
         this.content += `<form class="game__content">
             <div class="game__option">
-              <img src="${this.data.content.option1.image}" alt="${this.data.content.option1.alt}" width="468" height="458">
+              <img src="${this.data.answers[0].image.url}" alt="Option 1" width="${this.data.answers[0].image.width}" height="${this.data.answers[0].image.height}">
               <label class="game__answer  game__answer--photo">
                 <input name="question1" type="radio" value="photo">
                 <span>Фото</span>
@@ -43,7 +43,7 @@ export default class GameView extends AbstractView {
               </label>
             </div>
             <div class="game__option">
-              <img src="${this.data.content.option2.image}" alt="${this.data.content.option2.alt}" width="468" height="458">
+              <img src="${this.data.answers[1].image.url}" alt="Option 2" width="${this.data.answers[1].image.width}" height="${this.data.answers[1].image.height}">
               <label class="game__answer  game__answer--photo">
                 <input name="question2" type="radio" value="photo">
                 <span>Фото</span>
@@ -55,22 +55,19 @@ export default class GameView extends AbstractView {
             </div>
           </form>`;
         break;
-      case '3':
+      case QuestionType.ONE_OF_THREE:
         this.content += `<form class="game__content  game__content--triple">
             <div class="game__option" title="img1">
-              <img src="${this.data.content.option1.image}" alt="${this.data.content.option1.alt}" width="304" height="455">
+              <img src="${this.data.answers[0].image.url}" alt="Option 1" width="${this.data.answers[0].image.width}" height="${this.data.answers[0].image.height}">
             </div>
             <div class="game__option" title="img2">
-              <img src="${this.data.content.option2.image}" alt="${this.data.content.option2.alt}" width="304" height="455">
+              <img src="${this.data.answers[1].image.url}" alt="Option 2" width="${this.data.answers[1].image.width}" height="${this.data.answers[1].image.height}">
             </div>
             <div class="game__option" title="img3">
-              <img src="${this.data.content.option3.image}" alt="${this.data.content.option3.alt}" width="304" height="455">
+              <img src="${this.data.answers[2].image.url}" alt="Option 3" width="${this.data.answers[2].image.width}" height="${this.data.answers[2].image.height}">
             </div>
           </form>`;
         break;
-      default:
-        this.content += `<form class="game__content">
-          </form>`;
     }
 
     this.content += getStats(this.state.levels);
