@@ -6,24 +6,24 @@ export default class GameView extends AbstractView {
 
   constructor(levelState, levelData) {
     super();
-    this.state = levelState;
-    this.data = levelData;
+    this._state = levelState;
+    this._data = levelData;
   }
 
   getMarkup() {
-    this.content = '<p class="game__task">' + this.data.question + '</p>';
+    this.content = '<p class="game__task">' + this._data.question + '</p>';
 
-    switch (this.data.type) {
+    switch (this._data.type) {
       case QuestionType.TINDER_LIKE:
         this.content += `<form class="game__content  game__content--wide">
             <div class="game__option">
-              <img src="${this.data.answers[0].image.url}" alt="Option 1" width="${this.data.answers[0].image.width}" height="${this.data.answers[0].image.height}">
+              <img src="${this._data.answers[0].image.url}" alt="Option 1" width="${this._data.answers[0].image.width}" height="${this._data.answers[0].image.height}">
               <label class="game__answer  game__answer--photo">
                 <input name="question1" type="radio" value="photo">
                 <span>Фото</span>
               </label>
               <label class="game__answer  game__answer--paint">
-                <input name="question1" type="radio" value="paint">
+                <input name="question1" type="radio" value="painting">
                 <span>Рисунок</span>
               </label>
             </div>
@@ -32,24 +32,24 @@ export default class GameView extends AbstractView {
       case QuestionType.TWO_OF_TWO:
         this.content += `<form class="game__content">
             <div class="game__option">
-              <img src="${this.data.answers[0].image.url}" alt="Option 1" width="${this.data.answers[0].image.width}" height="${this.data.answers[0].image.height}">
+              <img src="${this._data.answers[0].image.url}" alt="Option 1" width="${this._data.answers[0].image.width}" height="${this._data.answers[0].image.height}">
               <label class="game__answer  game__answer--photo">
                 <input name="question1" type="radio" value="photo">
                 <span>Фото</span>
               </label>
               <label class="game__answer  game__answer--paint">
-                <input name="question1" type="radio" value="paint">
+                <input name="question1" type="radio" value="painting">
                 <span>Рисунок</span>
               </label>
             </div>
             <div class="game__option">
-              <img src="${this.data.answers[1].image.url}" alt="Option 2" width="${this.data.answers[1].image.width}" height="${this.data.answers[1].image.height}">
+              <img src="${this._data.answers[1].image.url}" alt="Option 2" width="${this._data.answers[1].image.width}" height="${this._data.answers[1].image.height}">
               <label class="game__answer  game__answer--photo">
                 <input name="question2" type="radio" value="photo">
                 <span>Фото</span>
               </label>
               <label class="game__answer  game__answer--paint">
-                <input name="question2" type="radio" value="paint">
+                <input name="question2" type="radio" value="painting">
                 <span>Рисунок</span>
               </label>
             </div>
@@ -57,20 +57,20 @@ export default class GameView extends AbstractView {
         break;
       case QuestionType.ONE_OF_THREE:
         this.content += `<form class="game__content  game__content--triple">
-            <div class="game__option" title="img1">
-              <img src="${this.data.answers[0].image.url}" alt="Option 1" width="${this.data.answers[0].image.width}" height="${this.data.answers[0].image.height}">
+            <div class="game__option" id="0">
+              <img src="${this._data.answers[0].image.url}" alt="Option 1" width="${this._data.answers[0].image.width}" height="${this._data.answers[0].image.height}">
             </div>
-            <div class="game__option" title="img2">
-              <img src="${this.data.answers[1].image.url}" alt="Option 2" width="${this.data.answers[1].image.width}" height="${this.data.answers[1].image.height}">
+            <div class="game__option" id="1">
+              <img src="${this._data.answers[1].image.url}" alt="Option 2" width="${this._data.answers[1].image.width}" height="${this._data.answers[1].image.height}">
             </div>
-            <div class="game__option" title="img3">
-              <img src="${this.data.answers[2].image.url}" alt="Option 3" width="${this.data.answers[2].image.width}" height="${this.data.answers[2].image.height}">
+            <div class="game__option" id="2">
+              <img src="${this._data.answers[2].image.url}" alt="Option 3" width="${this._data.answers[2].image.width}" height="${this._data.answers[2].image.height}">
             </div>
           </form>`;
         break;
     }
 
-    this.content += getStats(this.state.levels);
+    this.content += getStats(this._state.levels);
 
     return this.content;
   }

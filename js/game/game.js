@@ -5,11 +5,6 @@ export const QuestionType = {
   ONE_OF_THREE: 'one-of-three'
 };
 
-export const AnswerType = {
-  PAINTING: 'painting',
-  PHOTO: 'photo'
-};
-
 export const initialState = {
   level: 0,
   timer: {
@@ -21,16 +16,6 @@ export const initialState = {
     left: 3
   },
   levels: [
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown',
-    'unknown'
   ],
   answers: {
     correct: 0,
