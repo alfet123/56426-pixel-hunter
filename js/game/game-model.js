@@ -1,12 +1,12 @@
 
-import {initialState} from './game';
-import {gameData} from '../data/data';
+import {initialState} from '../data/data';
 
-class GameModel {
+export default class GameModel {
 
-  constructor() {
+  constructor(gameData) {
+    this.data = gameData;
     this._state = Object.assign({}, initialState);
-    for (let i = 0; i < gameData.length; i++) {
+    for (let i = 0; i < this.data.length; i++) {
       this._state.levels.push('unknown');
     }
   }
@@ -16,7 +16,7 @@ class GameModel {
   }
 
   getData() {
-    return gameData[this._state.level];
+    return this.data[this._state.level];
   }
 
   getTimer() {
@@ -64,9 +64,7 @@ class GameModel {
   }
 
   hasLevel() {
-    return this._state.level < gameData.length;
+    return this._state.level < this.data.length;
   }
 
 }
-
-export default new GameModel();

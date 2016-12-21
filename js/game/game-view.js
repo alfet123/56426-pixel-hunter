@@ -1,6 +1,6 @@
 
 import AbstractView from '../view';
-import {QuestionType, getStats} from '../game/game';
+import {QuestionType, getStats} from '../data/data';
 
 export default class GameView extends AbstractView {
 
@@ -59,12 +59,15 @@ export default class GameView extends AbstractView {
         this.content += `<form class="game__content  game__content--triple">
             <div class="game__option" id="0">
               <img src="${this._data.answers[0].image.url}" alt="Option 1" width="${this._data.answers[0].image.width}" height="${this._data.answers[0].image.height}">
+              <div class="game__option--haze"></div>
             </div>
             <div class="game__option" id="1">
               <img src="${this._data.answers[1].image.url}" alt="Option 2" width="${this._data.answers[1].image.width}" height="${this._data.answers[1].image.height}">
+              <div class="game__option--haze"></div>
             </div>
             <div class="game__option" id="2">
               <img src="${this._data.answers[2].image.url}" alt="Option 3" width="${this._data.answers[2].image.width}" height="${this._data.answers[2].image.height}">
+              <div class="game__option--haze"></div>
             </div>
           </form>`;
         break;
