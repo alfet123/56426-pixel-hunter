@@ -4,6 +4,7 @@ import GameView from '../game/game-view';
 import HeaderView from '../game/header-view';
 import Application from '../application';
 import {QuestionType} from '../data/data';
+import imageLoader from '../image-loader/image-loader';
 
 class GamePresenter {
 
@@ -23,10 +24,21 @@ class GamePresenter {
   }
 
   levelInit() {
-    const header = new HeaderView(this.model.getState());
-    const content = new GameView(this.model.getState(), this.model.getData());
+    const state = this.model.getState();
+    const data = this.model.getData();
+    const header = new HeaderView(state);
+    const content = new GameView(state, data);
+
     this.element.innerHTML = `${header.getMarkup(true)}
       <div class="game">${content.getMarkup()}</div>`;
+
+    const options = this.element.querySelectorAll('.game__option');
+    for (let i = 0; i < options.length; i++) {
+      imageLoader(document.querySelectorAll('.game__option img')[i]).load({
+        url: data.answers[i].image.url
+      }, data.answers[i].image.width, data.answers[i].image.height);
+    }
+
     this.timerElement = this.element.querySelector('.game__timer');
     this.bindHandlers();
     this.runTimer();
