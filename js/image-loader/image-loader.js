@@ -1,4 +1,6 @@
+
 class Resizer {
+
   constructor(width, height) {
     this.width = width;
     this.height = height;
@@ -17,8 +19,8 @@ class Resizer {
 
     return image;
   }
-}
 
+}
 
 export default (element) => {
   return {

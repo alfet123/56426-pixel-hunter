@@ -1,171 +1,34 @@
 
-export const gameData = [
-  {
-    type: '2',
-    task: 'Угадайте для каждого изображения фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 2'
-      }
-    },
-    answer: {
-      question1: 'photo',
-      question2: 'photo'
-    }
+export const QuestionType = {
+  TWO_OF_TWO: 'two-of-two',
+  TINDER_LIKE: 'tinder-like',
+  ONE_OF_THREE: 'one-of-three'
+};
+
+export const initialState = {
+  level: 0,
+  timer: {
+    init: 30,
+    value: 30
   },
-  {
-    type: '1',
-    task: 'Угадай, фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/705x455',
-        alt: 'Option 1'
-      }
-    },
-    answer: {
-      question1: 'photo'
-    }
+  lives: {
+    total: 3,
+    left: 3
   },
-  {
-    type: '3',
-    task: 'Найдите рисунок среди изображений',
-    content: {
-      option1: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 2'
-      },
-      option3: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 3'
-      }
-    },
-    answer: 'img1'
-  },
-  {
-    type: '1',
-    task: 'Угадай, фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/705x455',
-        alt: 'Option 1'
-      }
-    },
-    answer: {
-      question1: 'paint'
-    }
-  },
-  {
-    type: '2',
-    task: 'Угадайте для каждого изображения фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 2'
-      }
-    },
-    answer: {
-      question1: 'paint',
-      question2: 'paint'
-    }
-  },
-  {
-    type: '3',
-    task: 'Найдите рисунок среди изображений',
-    content: {
-      option1: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 2'
-      },
-      option3: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 3'
-      }
-    },
-    answer: 'img3'
-  },
-  {
-    type: '2',
-    task: 'Угадайте для каждого изображения фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 2'
-      }
-    },
-    answer: {
-      question1: 'photo',
-      question2: 'paint'
-    }
-  },
-  {
-    type: '1',
-    task: 'Угадай, фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/705x455',
-        alt: 'Option 1'
-      }
-    },
-    answer: {
-      question1: 'photo'
-    }
-  },
-  {
-    type: '3',
-    task: 'Найдите рисунок среди изображений',
-    content: {
-      option1: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 2'
-      },
-      option3: {
-        image: 'http://placehold.it/304x455',
-        alt: 'Option 3'
-      }
-    },
-    answer: 'img2'
-  },
-  {
-    type: '2',
-    task: 'Угадайте для каждого изображения фото или рисунок?',
-    content: {
-      option1: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 1'
-      },
-      option2: {
-        image: 'http://placehold.it/468x458',
-        alt: 'Option 2'
-      }
-    },
-    answer: {
-      question1: 'paint',
-      question2: 'photo'
-    }
+  levels: [
+  ],
+  answers: {
+    correct: 0,
+    fast: 0,
+    slow: 0
   }
-];
+};
+
+export const getStats = (levels) => {
+  let stats = '<ul class="stats">';
+  for (let i = 0; i < levels.length; i++) {
+    stats += '<li class="stats__result stats__result--' + levels[i] + '"></li>';
+  }
+  stats += '</ul>';
+  return stats;
+};

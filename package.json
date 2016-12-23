@@ -44,7 +44,8 @@
     "gulp-rename": "1.2.2",
     "gulp-sass": "2.3.2",
     "gulp-sourcemaps": "2.2.0",
-    "gulp-webpack": "1.5.0"
+    "gulp-webpack": "1.5.0",
+    "whatwg-fetch": "2.0.1"
   },
   "engines": {
     "node": "6.7.0"

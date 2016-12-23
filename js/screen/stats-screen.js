@@ -2,7 +2,7 @@
 import AbstractView from '../view';
 import Application from '../application';
 import HeaderView from '../game/header-view';
-import {getStats} from '../game/game';
+import {getStats} from '../data/data';
 
 class StatsView extends AbstractView {
 
