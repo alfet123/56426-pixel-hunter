@@ -1,4 +1,8 @@
 
+export const param = {
+  user: ''
+};
+
 export const QuestionType = {
   TWO_OF_TWO: 'two-of-two',
   TINDER_LIKE: 'tinder-like',

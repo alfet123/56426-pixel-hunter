@@ -2,11 +2,13 @@
 import AbstractView from '../view';
 import Application from '../application';
 import HeaderView from '../game/header-view';
+import {param} from '../data/data';
 
 class RulesView extends AbstractView {
 
   constructor() {
     super();
+    this.userName = null;
     this.header = new HeaderView();
   }
 
@@ -35,6 +37,7 @@ class RulesView extends AbstractView {
     };
 
     input.oninput = (evt) => {
+      this.userName = evt.target.value;
       if (evt.target.value) {
         submit.removeAttribute('disabled');
       } else {
@@ -44,6 +47,7 @@ class RulesView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
+      param.user = this.userName;
       Application.showGame();
     };
   }
