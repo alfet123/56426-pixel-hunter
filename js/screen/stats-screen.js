@@ -25,7 +25,7 @@ class StatsView extends AbstractView {
     this.newStat.stats = this._state.levels.slice(0);
     this.newStat.lives = this._state.lives.left;
 
-    fetch(url, {
+    window.fetch(url, {
       method: 'POST',
       body: JSON.stringify(this.newStat),
       headers: {
