@@ -2,7 +2,7 @@
 import AbstractView from '../view';
 import Application from '../application';
 import HeaderView from '../game/header-view';
-import {param, getStats} from '../data/data';
+import {param, Answer, getStats, status} from '../data/data';
 
 class StatsView extends AbstractView {
 
@@ -16,6 +16,7 @@ class StatsView extends AbstractView {
       lives: 50
     };
     this.newStat = {};
+    this.userStats = null;
   }
 
   sendStats() {
@@ -31,80 +32,134 @@ class StatsView extends AbstractView {
         'Content-Type': 'application/json'
       }
     }).
-        then(this.status).
-        then(function (data) {
+        then(status).
+        then((data) => {
           window.console.log('Request succeeded with JSON response', data);
         }).
-        catch(function (error) {
+        catch((error) => {
           window.console.log('Request failed', error);
         });
   }
 
-  getMarkup() {
-    let score = this._state.answers.correct * this.factor.points;
-    let scoreString = (score > 0) ? this._state.answers.correct + '&nbsp;×&nbsp;' + this.factor.points : '';
-    let fastBonus = this._state.answers.fast * this.factor.speed;
-    let livesBonus = this._state.lives.left * this.factor.lives;
-    let slowPenalty = this._state.answers.slow * this.factor.speed;
+  loadStats() {
+    const url = 'https://intensive-ecmascript-server-dxttmcdylw.now.sh/pixel-hunter/stats/' + param.user;
 
-    let scoreTotal = (score > 0) ? score + fastBonus + livesBonus - slowPenalty : 0;
+    window.fetch(url).
+        then(status).
+        then((response) => response.json()).
+        then((data) => {
+          this.userStats = data;
+        }).
+        catch((error) => {
+          window.console.log('Request failed', error);
+        });
+  }
 
-    let statsTitle = (scoreTotal > 0) ? 'Победа!' : 'Поражение';
+  calcScores(state) {
+    const result = {
+      correct: 0,
+      fast: 0,
+      slow: 0,
+      score: 0,
+      scoreString: '',
+      fastBonus: 0,
+      livesBonus: 0,
+      slowPenalty: 0,
+      scoreTotal: 0
+    };
 
-    let result = `${this.header.getMarkup()}
-      <div class="result">
-        <h1>${statsTitle}</h1>
-        <table class="result__table">
-        <tr>
-          <td class="result__number">1.</td>
-          <td colspan="2">${getStats(this._state.levels)}</td>
-          <td class="result__points">${scoreString}</td>
-          <td class="result__total">${score}</td>
-        </tr>`;
-    if (score > 0) {
-      if (fastBonus > 0) {
-        result += `<tr>
-            <td></td>
-            <td class="result__extra">Бонус за скорость:</td>
-            <td class="result__extra">${this._state.answers.fast}&nbsp;<span class="stats__result  stats__result--fast"></span></td>
-            <td class="result__points">×&nbsp;${this.factor.speed}</td>
-            <td class="result__total">${fastBonus}</td>
-          </tr>`;
-      }
-      if (livesBonus > 0) {
-        result += `<tr>
-            <td></td>
-            <td class="result__extra">Бонус за жизни:</td>
-            <td class="result__extra">${this._state.lives.left}&nbsp;<span class="stats__result  stats__result--heart"></span></td>
-            <td class="result__points">×&nbsp;${this.factor.lives}</td>
-            <td class="result__total">${livesBonus}</td>
-          </tr>`;
-      }
-      if (slowPenalty > 0) {
-        result += `<tr>
-            <td></td>
-            <td class="result__extra">Штраф за медлительность:</td>
-            <td class="result__extra">${this._state.answers.slow}&nbsp;<span class="stats__result  stats__result--slow"></span></td>
-            <td class="result__points">×&nbsp;${this.factor.speed}</td>
-            <td class="result__total">-${slowPenalty}</td>
-          </tr>`;
+    for (let i = 0; i < state.stats.length; ++i) {
+      switch (state.stats[i]) {
+        case Answer.CORRECT:
+          result.correct++;
+          break;
+        case Answer.FAST:
+          result.correct++;
+          result.fast++;
+          break;
+        case Answer.SLOW:
+          result.correct++;
+          result.slow++;
+          break;
       }
     }
-    result += `<tr>
-            <td colspan="5" class="result__total  result__total--final">${scoreTotal}</td>
-          </tr>
-        </table>
-      </div>`;
+
+    result.score = result.correct * this.factor.points;
+    result.scoreString = (result.score > 0) ? result.correct + '&nbsp;×&nbsp;' + this.factor.points : '';
+    result.fastBonus = result.fast * this.factor.speed;
+    result.livesBonus = state.lives * this.factor.lives;
+    result.slowPenalty = result.slow * this.factor.speed;
+    result.scoreTotal = (result.score > 0) ? result.score + result.fastBonus + result.livesBonus - result.slowPenalty : 0;
 
     return result;
   }
 
-  status(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
-    } else {
-      throw new Error(`${response.status}: ${response.statusText}`);
+  getMarkup() {
+
+    const resultCount = this.userStats.length;
+    let resultTable = '';
+    let statsTitle = '';
+
+    for (let i = 1; i <= resultCount; ++i) {
+
+      let index = resultCount - i;
+      let statItem = this.userStats[index];
+      let result = this.calcScores(statItem);
+
+      if ((index + 1) === resultCount) {
+        statsTitle = (result.scoreTotal > 0) ? 'Победа!' : 'Поражение';
+      }
+
+      resultTable += `<table class="result__table">
+          <tr>
+            <td class="result__number">${i}.</td>
+            <td colspan="2">${getStats(statItem.stats)}</td>
+            <td class="result__points">${result.scoreString}</td>
+            <td class="result__total">${result.score}</td>
+          </tr>`;
+      if (result.score > 0) {
+        if (result.fastBonus > 0) {
+          resultTable += `<tr>
+              <td></td>
+              <td class="result__extra">Бонус за скорость:</td>
+              <td class="result__extra">${result.fast}&nbsp;<span class="stats__result  stats__result--fast"></span></td>
+              <td class="result__points">×&nbsp;${this.factor.speed}</td>
+              <td class="result__total">${result.fastBonus}</td>
+            </tr>`;
+        }
+        if (result.livesBonus > 0) {
+          resultTable += `<tr>
+              <td></td>
+              <td class="result__extra">Бонус за жизни:</td>
+              <td class="result__extra">${statItem.lives}&nbsp;<span class="stats__result  stats__result--heart"></span></td>
+              <td class="result__points">×&nbsp;${this.factor.lives}</td>
+              <td class="result__total">${result.livesBonus}</td>
+            </tr>`;
+        }
+        if (result.slowPenalty > 0) {
+          resultTable += `<tr>
+              <td></td>
+              <td class="result__extra">Штраф за медлительность:</td>
+              <td class="result__extra">${result.slow}&nbsp;<span class="stats__result  stats__result--slow"></span></td>
+              <td class="result__points">×&nbsp;${this.factor.speed}</td>
+              <td class="result__total">-${result.slowPenalty}</td>
+            </tr>`;
+        }
+      }
+      resultTable += `<tr>
+              <td colspan="5" class="result__total  result__total--final">${result.scoreTotal}</td>
+            </tr>
+          </table>`;
+
     }
+
+    resultTable += '</div>';
+
+    let resultHeader = `${this.header.getMarkup()}
+      <div class="result">
+        <h1>${statsTitle}</h1>`;
+
+    return resultHeader + resultTable;
   }
 
   bindHandlers() {
@@ -116,5 +171,6 @@ class StatsView extends AbstractView {
 export default (state) => {
   const stats = new StatsView(state);
   stats.sendStats();
+  stats.loadStats();
   return stats.element;
 };
