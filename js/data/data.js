@@ -1,5 +1,6 @@
 
 export const param = {
+  baseUrl: 'https://intensive-ecmascript-server-dxttmcdylw.now.sh/pixel-hunter/stats/',
   user: ''
 };
 
