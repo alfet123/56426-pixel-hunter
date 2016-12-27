@@ -17,13 +17,9 @@ class StatsView extends AbstractView {
     };
     this.url = param.baseUrl + param.user;
     this.newStat = {};
-    this.userStats = null;
   }
 
   sendStats() {
-    this.newStat.stats = this._state.levels.slice(0);
-    this.newStat.lives = this._state.lives.left;
-
     window.fetch(this.url, {
       method: 'POST',
       body: JSON.stringify(this.newStat),
@@ -34,23 +30,9 @@ class StatsView extends AbstractView {
         then(status).
         then((data) => {
           window.console.log('Post request succeeded', data);
-          this.loadStats();
         }).
         catch((error) => {
           window.console.log('Post request failed', error);
-        });
-  }
-
-  loadStats() {
-    window.fetch(this.url).
-        then(status).
-        then((response) => response.json()).
-        then((data) => {
-          window.console.log('Get request succeeded with JSON response', data);
-          this.userStats = data;
-        }).
-        catch((error) => {
-          window.console.log('Get request failed', error);
         });
   }
 
@@ -95,14 +77,14 @@ class StatsView extends AbstractView {
 
   getMarkup() {
 
-    const resultCount = this.userStats.length;
+    const resultCount = param.userStats.length;
     let resultTable = '';
     let statsTitle = '';
 
     for (let i = 1; i <= resultCount; ++i) {
 
       let index = resultCount - i;
-      let statItem = this.userStats[index];
+      let statItem = param.userStats[index];
       let result = this.calcScores(statItem);
 
       if ((index + 1) === resultCount) {
@@ -169,6 +151,9 @@ class StatsView extends AbstractView {
 
 export default (state) => {
   const stats = new StatsView(state);
+  stats.newStat.stats = stats._state.levels.slice(0);
+  stats.newStat.lives = stats._state.lives.left;
+  param.userStats.push(stats.newStat);
   stats.sendStats();
   return stats.element;
 };
