@@ -1,8 +1,22 @@
 
+export const param = {
+  baseUrl: 'https://intensive-ecmascript-server-dxttmcdylw.now.sh/pixel-hunter/stats/',
+  user: '',
+  userStats: [
+  ]
+};
+
 export const QuestionType = {
   TWO_OF_TWO: 'two-of-two',
   TINDER_LIKE: 'tinder-like',
   ONE_OF_THREE: 'one-of-three'
+};
+
+export const Answer = {
+  CORRECT: 'correct',
+  WRONG: 'wrong',
+  FAST: 'fast',
+  SLOW: 'slow'
 };
 
 export const initialState = {
@@ -31,4 +45,12 @@ export const getStats = (levels) => {
   }
   stats += '</ul>';
   return stats;
+};
+
+export const status = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    throw new Error(`${response.status}: ${response.statusText}`);
+  }
 };

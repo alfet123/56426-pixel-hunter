@@ -2,11 +2,14 @@
 import AbstractView from '../view';
 import Application from '../application';
 import HeaderView from '../game/header-view';
+import {param} from '../data/data';
 
 class RulesView extends AbstractView {
 
   constructor() {
     super();
+    this.userName = null;
+    this.url = '';
     this.header = new HeaderView();
   }
 
@@ -35,6 +38,7 @@ class RulesView extends AbstractView {
     };
 
     input.oninput = (evt) => {
+      this.userName = evt.target.value;
       if (evt.target.value) {
         submit.removeAttribute('disabled');
       } else {
@@ -44,8 +48,25 @@ class RulesView extends AbstractView {
 
     submit.onclick = (evt) => {
       evt.preventDefault();
+      param.user = this.userName;
+      this.url = param.baseUrl + param.user;
+      this.loadStats();
       Application.showGame();
     };
+  }
+
+  loadStats() {
+    window.fetch(this.url).
+        then(status).
+        then((response) => response.json()).
+        then((data) => {
+          window.console.log('Get request succeeded with JSON response', data);
+          param.userStats = data.slice(0);
+          window.console.log('Get request succeeded with JSON response', param.userStats);
+        }).
+        catch((error) => {
+          window.console.log('Get request failed', error);
+        });
   }
 
 }
